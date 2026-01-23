@@ -1,6 +1,7 @@
 package com.jbarradev.week01.controllers;
 
 import com.jbarradev.week01.dtos.UserRequestDTO;
+import com.jbarradev.week01.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,10 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
 
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
     @PostMapping
-    public ResponseEntity<?> createUser(@Valid @RequestBody UserRequestDTO request){
-        return ResponseEntity.ok(
-                "Usuario recibido: " + request.getName() + " (" + request.getEmail() + ")"
-        );
+    public ResponseEntity<?> createUser(@Valid @RequestBody UserRequestDTO request) {
+        return ResponseEntity.ok(userService.createUser(request));
     }
 }
