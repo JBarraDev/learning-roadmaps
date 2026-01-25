@@ -25,5 +25,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(TaskNotFoundException.class)
     public ResponseEntity<?> handleTaskNotFound(TaskNotFoundException ex) {
-        return ResponseEntity.status(404).body(ex.getMessage()); }
+        return ResponseEntity.status(404).body(ex.getMessage());
+    }
+
 }

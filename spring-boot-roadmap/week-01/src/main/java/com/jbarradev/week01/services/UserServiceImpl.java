@@ -10,4 +10,5 @@ public class UserServiceImpl implements UserService {
     public UserResponseDTO createUser(UserRequestDTO userRequestDTO) {
         return new UserResponseDTO(userRequestDTO.getName(),  userRequestDTO.getEmail());
     }
+
 }

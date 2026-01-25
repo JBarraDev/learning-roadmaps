@@ -33,7 +33,6 @@ public class TaskController {
     @PostMapping
     public ResponseEntity<TaskResponseDTO> createTask(@Valid @RequestBody TaskRequestDTO taskRequestDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(taskService.createTask(taskRequestDTO));
-
     }
 
     @DeleteMapping("/{id}")
