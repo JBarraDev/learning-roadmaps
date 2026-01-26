@@ -23,33 +23,56 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<TaskResponseDTO> getTasks() {
-        List<TaskResponseDTO> taskResponseDTOs  = new ArrayList<>();
         return tasks.stream()
-                .map(TaskServiceImpl::convertTaskToTaskResponseDTO)
+                .map(this::convertTaskToTaskResponseDTO)
                 .toList();
     }
 
     @Override
     public TaskResponseDTO getTaskById(Long id) {
-        Task task = tasks.stream()
-                .filter(t -> t.getId().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new TaskNotFoundException(id));
+        Task task = findTaskOrThrowException(id);
         return convertTaskToTaskResponseDTO(task);
     }
 
     @Override
     public void deleteTaskById(Long id) {
-        Task task = tasks.stream()
-                .filter(t -> t.getId().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new TaskNotFoundException(id));
-
+        Task task = findTaskOrThrowException(id);
         tasks.remove(task);
     }
 
-    private static TaskResponseDTO convertTaskToTaskResponseDTO(Task task) {
+    @Override
+    public TaskResponseDTO updateTask(Long id, TaskRequestDTO taskRequestDTO) {
+        Task task = findTaskOrThrowException(id);
+
+        task.setTitle(taskRequestDTO.getTitle());
+        task.setDescription(taskRequestDTO.getDescription());
+
+        return convertTaskToTaskResponseDTO(task);
+    }
+
+    @Override
+    public TaskResponseDTO markTaskAsCompleted(Long id) {
+        Task task = findTaskOrThrowException(id);
+        task.setCompleted(true);
+        return convertTaskToTaskResponseDTO(task);
+    }
+
+    @Override
+    public TaskResponseDTO toggleTaskCompleted(Long id) {
+        Task task = findTaskOrThrowException(id);
+        task.setCompleted(!task.isCompleted());
+        return convertTaskToTaskResponseDTO(task);
+    }
+
+    private TaskResponseDTO convertTaskToTaskResponseDTO(Task task) {
         return new TaskResponseDTO(task.getId(),  task.getTitle(), task.getDescription(), task.isCompleted());
+    }
+
+    private Task findTaskOrThrowException(Long id){
+        return tasks.stream()
+                .filter(t -> t.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new TaskNotFoundException(id));
     }
 
 }

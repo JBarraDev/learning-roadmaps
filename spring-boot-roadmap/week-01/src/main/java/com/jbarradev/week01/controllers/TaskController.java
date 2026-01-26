@@ -41,4 +41,19 @@ public class TaskController {
         return ResponseEntity.ok("Task deleted");
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<TaskResponseDTO>  updateTask(@PathVariable Long id, @Valid @RequestBody TaskRequestDTO taskRequestDTO) {
+        return ResponseEntity.ok(taskService.updateTask(id, taskRequestDTO));
+    }
+
+    @PatchMapping("/{id}/complete")
+    public ResponseEntity<TaskResponseDTO> completeTask(@PathVariable Long id) {
+        return ResponseEntity.ok(taskService.markTaskAsCompleted(id));
+    }
+
+    @PatchMapping("/{id}/toggle")
+    public ResponseEntity<TaskResponseDTO> toggleTask(@PathVariable Long id) {
+        return ResponseEntity.ok(taskService.toggleTaskCompleted(id));
+    }
+
 }
