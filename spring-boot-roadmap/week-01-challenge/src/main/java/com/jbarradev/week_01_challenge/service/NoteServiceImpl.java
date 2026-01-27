@@ -49,6 +49,16 @@ public class NoteServiceImpl implements NoteService {
         notes.remove(note);
     }
 
+    @Override
+    public List<NoteResponseDTO> findNotesByKeyword(String keyword) {
+        return notes.stream()
+                .filter(note -> note.getTitle()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()))
+                .map(this::convertNoteToNoteResponseDTO)
+                .toList();
+    }
+
     private Note findNoteOrThrowException(Long id) {
         return notes.stream()
                 .filter(n -> n.getId().equals(id))

@@ -17,4 +17,6 @@ public interface NoteService {
 
     void deleteNote(Long id);
 
+    List<NoteResponseDTO> findNotesByKeyword(String keyword);
+
 }
