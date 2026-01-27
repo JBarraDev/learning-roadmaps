@@ -1,0 +1,153 @@
+{
+  "info": {
+    "_postman_id": "0b967ccf-d073-42ed-95ea-796cf4abdd7a",
+    "name": "Week-01 Challenge",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "49194804",
+    "_collection_link": "https://go.postman.co/collection/49194804-0b967ccf-d073-42ed-95ea-796cf4abdd7a?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "ObtenerTodasLasNotas",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/notes",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "notes"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ObtenerNotaPorID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/notes/3",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "notes",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CrearNota",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\" : \"Reparar bici\",\r\n    \"content\": \"Echar un vistazo a los componentes de la bici para reparar.\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/notes",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "notes"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ActualizarNota",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\" : \"Llamar al loco de Guty\",\r\n    \"content\" : \"Estará esperando mi llamada.\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/notes/3",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "notes",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "BorrarNota",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/notes/4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "notes",
+            "4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ObtenerNotasPorPalabraClave",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/notes/search?keyword=Boot",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "notes",
+            "search"
+          ],
+          "query": [
+            {
+              "key": "keyword",
+              "value": "Boot"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
