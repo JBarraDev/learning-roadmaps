@@ -5,6 +5,7 @@ import com.jbarradev.week01.dtos.TaskRequestDTO;
 import com.jbarradev.week01.dtos.TaskResponseDTO;
 import com.jbarradev.week01.exceptions.TaskNotFoundException;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,10 +66,10 @@ public class TaskServiceImpl implements TaskService {
     }
 
     private TaskResponseDTO convertTaskToTaskResponseDTO(Task task) {
-        return new TaskResponseDTO(task.getId(),  task.getTitle(), task.getDescription(), task.isCompleted());
+        return new TaskResponseDTO(task.getId(), task.getTitle(), task.getDescription(), task.isCompleted());
     }
 
-    private Task findTaskOrThrowException(Long id){
+    private Task findTaskOrThrowException(Long id) {
         return tasks.stream()
                 .filter(t -> t.getId().equals(id))
                 .findFirst()

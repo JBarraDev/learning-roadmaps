@@ -1,4 +1,4 @@
-# 📅 Día 4 — Semana 1 ## Refactorización, buenas prácticas y actualización de tareas (PUT / PATCH)
+# 📅 Día 6 — Semana 1 ## Refactorización, buenas prácticas y actualización de tareas (PUT / PATCH)
 
 ### 🎯 Objetivo del día
 - Añadir endpoints para actualizar tareas (PUT), marcarlas como completadas (PATCH) y alternar su estado (PATCH toggle).

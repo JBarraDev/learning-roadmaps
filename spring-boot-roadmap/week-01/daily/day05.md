@@ -1,4 +1,4 @@
-# 📅 Día 4 — Semana 1 ## Revisión de código (validaciones y manejo de errores)
+# 📅 Día 5 — Semana 1 ## Revisión de código (validaciones y manejo de errores)
 
 ### 🎯 Objetivo del día
 - Revisar y asegurar que la API valida correctamente los datos de entrada.
