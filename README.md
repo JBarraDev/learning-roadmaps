@@ -34,6 +34,7 @@ learning-roadmaps/
 │
 ├── spring-boot-roadmap/   → en proceso
 │   ├── week-01/
+│   ├── week-01-challenge/
 │   ├── week-02/
 │   ├── ...
 │   └── eventhub-final/
@@ -52,6 +53,7 @@ Cada roadmap está organizado por semanas. Dentro de cada semana encontrarás:
 - Un README con los objetivos
 - Proyectos completos con su código
 - Notas personales
+- Un desafío semanal
 - Desafíos adicionales
 
 ---
@@ -63,6 +65,9 @@ Cada roadmap incluye:
 - **Semanas estructuradas** con objetivos claros
 - **Proyectos reales** con su propio README
 - **Desafíos adicionales** para reforzar aprendizaje
+  - Estos desafíos son proyectos independientes
+  - Sirven para comprobar que puedo aplicar lo aprendido sin ayuda
+  - Se guardan en carpetas como week-01-challenge/, week-02-challenge/, etc.
 - **Notas personales** sobre lo aprendido
 - **Buenas prácticas** aplicadas desde el primer día
 
@@ -71,14 +76,14 @@ Cada roadmap incluye:
 
 ![Status](https://img.shields.io/badge/Estado-En%20progreso-yellow)
 
-Actualmente trabajando en: **Semana 1 — Fundamentos y primera API**  
+Actualmente trabajando en: **Semana 2 — Validaciones y manejo de errores**  
 Roadmap activo: **Spring Boot (12 semanas)**
 
 ---
 
 ## 📅 Progreso del roadmap actual (Spring Boot)
 
-- [ ] Semana 1 — Fundamentos y primera API
+- [x] Semana 1 — Fundamentos y primera API
 - [ ] Semana 2 — Validaciones y manejo de errores
 - [ ] Semana 3 — JPA y persistencia
 - [ ] Semana 4 — Relaciones y consultas avanzadas
