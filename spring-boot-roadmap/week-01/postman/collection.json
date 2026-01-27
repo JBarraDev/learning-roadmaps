@@ -1,0 +1,177 @@
+{
+  "info": {
+    "_postman_id": "33f65b70-6bb6-49dc-b807-0d51b2e385d5",
+    "name": "Week01 API",
+    "description": "Colección de pruebas manuales de la API de tareas desarrollada en la Week 01.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "49194804",
+    "_collection_link": "https://go.postman.co/collection/49194804-33f65b70-6bb6-49dc-b807-0d51b2e385d5?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "ObtenerTodasLasTareas",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/tasks",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "tasks"
+          ]
+        },
+        "description": "Devuelve la lista completa de tareas almacenadas en memoria."
+      },
+      "response": []
+    },
+    {
+      "name": "ObtenerTareaPorID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/tasks/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "tasks",
+            "1"
+          ]
+        },
+        "description": "Devuelve una tarea concreta según su identificador.  \nSi el **ID** no existe, la API responde con un mensaje de error en texto plano."
+      },
+      "response": []
+    },
+    {
+      "name": "CrearTarea",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"Estudiar Spring Boot\",\r\n    \"description\": \"Dedicar 2 horas diarias a mejorar mi nivel de Spring Boot para poder trabajar de ello algún día.\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/tasks",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "tasks"
+          ]
+        },
+        "description": "Crea una nueva tarea a partir de los datos enviados en el body.  \nDevuelve **201 Created** junto con la tarea generada, incluyendo su ID y el estado `completed` en `false`."
+      },
+      "response": []
+    },
+    {
+      "name": "ActualizarTarea",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"Estudiar Spring Boot - Java\",\r\n    \"description\": \"Dedicar 2 horas diarias a mejorar mi nivel de Java y Spring Boot para poder trabajar de ello algún día.\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/tasks/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "tasks",
+            "1"
+          ]
+        },
+        "description": "Reemplaza completamente una tarea existente.  \nRequiere enviar **title** y **description**.  \nSi el ID no existe, devuelve un mensaje de error."
+      },
+      "response": []
+    },
+    {
+      "name": "MarcarTareaComoCompletada",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/tasks/1/complete",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "tasks",
+            "1",
+            "complete"
+          ]
+        },
+        "description": "Marca la tarea como completada estableciendo `completed = true`.  \nNo requiere body.  \nSi el ID no existe, devuelve un mensaje de error."
+      },
+      "response": []
+    },
+    {
+      "name": "AlternarEstadoTarea",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/tasks/1/toggle",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "tasks",
+            "1",
+            "toggle"
+          ]
+        },
+        "description": "Alterna el estado de la tarea:\n\n- Si está en `true`, pasa a `false`.\n    \n- Si está en `false`, pasa a `true`.\n    \n\nNo requiere body.  \nSi el ID no existe, devuelve un mensaje de error."
+      },
+      "response": []
+    },
+    {
+      "name": "BorrarTarea",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/tasks/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "tasks",
+            "1"
+          ]
+        },
+        "description": "Elimina una tarea por su ID.  \nDevuelve un **String plano** con el texto `\"Task deleted\"`.  \nSi el ID no existe, devuelve un mensaje de error."
+      },
+      "response": []
+    }
+  ]
+}
