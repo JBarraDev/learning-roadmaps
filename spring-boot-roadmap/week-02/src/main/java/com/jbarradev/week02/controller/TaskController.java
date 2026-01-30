@@ -1,0 +1,59 @@
+package com.jbarradev.week02.controller;
+
+import com.jbarradev.week02.dto.TaskRequestDTO;
+import com.jbarradev.week02.dto.TaskResponseDTO;
+import com.jbarradev.week02.service.TaskService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/tasks")
+public class TaskController {
+
+    private final TaskService taskService;
+
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<TaskResponseDTO>> getAllTasks() {
+        return ResponseEntity.ok(taskService.getTasks());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TaskResponseDTO> getTaskById(@PathVariable Long id) {
+        return ResponseEntity.ok(taskService.getTaskById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<TaskResponseDTO> createTask(@Valid @RequestBody TaskRequestDTO taskRequestDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(taskService.createTask(taskRequestDTO));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteTaskById(@PathVariable Long id) {
+        taskService.deleteTaskById(id);
+        return ResponseEntity.ok("Task deleted");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TaskResponseDTO> updateTask(@PathVariable Long id, @Valid @RequestBody TaskRequestDTO taskRequestDTO) {
+        return ResponseEntity.ok(taskService.updateTask(id, taskRequestDTO));
+    }
+
+    @PatchMapping("/{id}/complete")
+    public ResponseEntity<TaskResponseDTO> completeTask(@PathVariable Long id) {
+        return ResponseEntity.ok(taskService.markTaskAsCompleted(id));
+    }
+
+    @PatchMapping("/{id}/toggle")
+    public ResponseEntity<TaskResponseDTO> toggleTask(@PathVariable Long id) {
+        return ResponseEntity.ok(taskService.toggleTaskCompleted(id));
+    }
+
+}
