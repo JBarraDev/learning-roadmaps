@@ -9,10 +9,10 @@ import lombok.Setter;
 @Setter
 public class TaskRequestDTO {
 
-    @NotBlank
+    @NotBlank (message = "El título no debe estar vacío")
     private String title;
 
-    @Size(min = 5)
+    @Size(min = 5, message = "La descripción debe tener al menos 5 caracteres")
     private String description;
 
 }

@@ -3,6 +3,7 @@ package com.jbarradev.week02.service;
 import com.jbarradev.week02.domain.Task;
 import com.jbarradev.week02.dto.TaskRequestDTO;
 import com.jbarradev.week02.dto.TaskResponseDTO;
+import com.jbarradev.week02.exception.TaskNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -72,7 +73,7 @@ public class TaskServiceImpl implements TaskService {
         return tasks.stream()
                 .filter(t -> t.getId().equals(id))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new TaskNotFoundException("La tarea con id " + id + " no existe"));
     }
 
 }
