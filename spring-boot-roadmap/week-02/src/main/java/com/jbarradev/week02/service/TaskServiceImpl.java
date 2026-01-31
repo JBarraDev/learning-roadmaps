@@ -3,6 +3,7 @@ package com.jbarradev.week02.service;
 import com.jbarradev.week02.domain.Task;
 import com.jbarradev.week02.dto.TaskRequestDTO;
 import com.jbarradev.week02.dto.TaskResponseDTO;
+import com.jbarradev.week02.exception.InvalidTaskException;
 import com.jbarradev.week02.exception.TaskNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -31,18 +32,21 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskResponseDTO getTaskById(Long id) {
+        checkNegativeId(id);
         Task task = findTask(id);
         return convertTaskToTaskResponseDTO(task);
     }
 
     @Override
     public void deleteTaskById(Long id) {
+        checkNegativeId(id);
         Task task = findTask(id);
         tasks.remove(task);
     }
 
     @Override
     public TaskResponseDTO updateTask(Long id, TaskRequestDTO taskRequestDTO) {
+        checkNegativeId(id);
         Task task = findTask(id);
 
         task.setTitle(taskRequestDTO.getTitle());
@@ -53,6 +57,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskResponseDTO markTaskAsCompleted(Long id) {
+        checkNegativeId(id);
         Task task = findTask(id);
         task.setCompleted(true);
         return convertTaskToTaskResponseDTO(task);
@@ -60,6 +65,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskResponseDTO toggleTaskCompleted(Long id) {
+        checkNegativeId(id);
         Task task = findTask(id);
         task.setCompleted(!task.isCompleted());
         return convertTaskToTaskResponseDTO(task);
@@ -74,6 +80,10 @@ public class TaskServiceImpl implements TaskService {
                 .filter(t -> t.getId().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new TaskNotFoundException("La tarea con id " + id + " no existe"));
+    }
+
+    private void checkNegativeId(Long id) {
+        if (id < 0) { throw new InvalidTaskException("El id no puede ser negativo"); }
     }
 
 }
