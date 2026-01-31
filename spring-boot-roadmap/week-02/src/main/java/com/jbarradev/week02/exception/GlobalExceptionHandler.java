@@ -40,4 +40,10 @@ public class GlobalExceptionHandler {
         ExceptionResponseDTO error = new ExceptionResponseDTO(LocalDateTime.now(), ex.getMessage(), request.getDescription(false) );
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(InvalidTaskException.class)
+    public ResponseEntity<ExceptionResponseDTO> handleInvalidTaskException(InvalidTaskException ex, WebRequest request) {
+        ExceptionResponseDTO error = new ExceptionResponseDTO(LocalDateTime.now(), ex.getMessage(),request.getDescription(false) );
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
 }
