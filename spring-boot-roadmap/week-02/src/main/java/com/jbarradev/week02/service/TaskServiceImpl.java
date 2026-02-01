@@ -5,6 +5,8 @@ import com.jbarradev.week02.dto.TaskRequestDTO;
 import com.jbarradev.week02.dto.TaskResponseDTO;
 import com.jbarradev.week02.exception.InvalidTaskException;
 import com.jbarradev.week02.exception.TaskNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,10 +18,13 @@ public class TaskServiceImpl implements TaskService {
     private final List<Task> tasks = new ArrayList<>();
     private Long nextId = 1L;
 
+    private static final Logger log = LoggerFactory.getLogger(TaskServiceImpl.class);
+
     @Override
     public TaskResponseDTO createTask(TaskRequestDTO taskRequestDTO) {
         Task task = new Task(nextId++, taskRequestDTO.getTitle(), taskRequestDTO.getDescription(), false);
         tasks.add(task);
+        log.info("Creating task with title: {}", task.getTitle());
         return convertTaskToTaskResponseDTO(task);
     }
 
@@ -42,6 +47,7 @@ public class TaskServiceImpl implements TaskService {
         checkNegativeId(id);
         Task task = findTask(id);
         tasks.remove(task);
+        log.info("Deleting task with id: {}", id);
     }
 
     @Override
@@ -51,7 +57,7 @@ public class TaskServiceImpl implements TaskService {
 
         task.setTitle(taskRequestDTO.getTitle());
         task.setDescription(taskRequestDTO.getDescription());
-
+        log.info("Updating task with id: {}", id);
         return convertTaskToTaskResponseDTO(task);
     }
 
@@ -60,6 +66,7 @@ public class TaskServiceImpl implements TaskService {
         checkNegativeId(id);
         Task task = findTask(id);
         task.setCompleted(true);
+        log.info("Marking task {} as completed", id);
         return convertTaskToTaskResponseDTO(task);
     }
 
@@ -68,6 +75,7 @@ public class TaskServiceImpl implements TaskService {
         checkNegativeId(id);
         Task task = findTask(id);
         task.setCompleted(!task.isCompleted());
+        log.info("Toggling completion for task with id: {}", id);
         return convertTaskToTaskResponseDTO(task);
     }
 
@@ -76,14 +84,21 @@ public class TaskServiceImpl implements TaskService {
     }
 
     private Task findTask(Long id) {
+        log.info("Fetching task with id: {}", id);
         return tasks.stream()
                 .filter(t -> t.getId().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new TaskNotFoundException("La tarea con id " + id + " no existe"));
+                .orElseThrow(() -> {
+                    log.warn("Task not found with id: {}", id);
+                    return new TaskNotFoundException("La tarea con id " + id + " no existe");
+                });
     }
 
     private void checkNegativeId(Long id) {
-        if (id < 0) { throw new InvalidTaskException("El id no puede ser negativo"); }
+        if (id < 0) {
+            log.warn("Invalid ID received: {}", id);
+            throw new InvalidTaskException("El id no puede ser negativo");
+        }
     }
 
 }
