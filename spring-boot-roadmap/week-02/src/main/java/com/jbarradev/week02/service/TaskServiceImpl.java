@@ -75,7 +75,7 @@ public class TaskServiceImpl implements TaskService {
         checkNegativeId(id);
         Task task = findTask(id);
         task.setCompleted(!task.isCompleted());
-        log.info("Toggling completion for task with id: {}", id);
+        log.info("Toggling completion for task with id: {}. New status is {}.", id, task.isCompleted());
         return convertTaskToTaskResponseDTO(task);
     }
 
